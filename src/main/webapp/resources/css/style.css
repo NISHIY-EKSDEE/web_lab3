@@ -1,0 +1,8 @@
+body	{background: url("background.jpg")}
+.coordLabel {font-size: 20px}
+#divWithImageMap  {width: 400px; height: 400px}
+#divWithImageMap img{  transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease}
+#tableR td{border: 1px solid black}

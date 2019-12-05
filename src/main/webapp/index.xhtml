@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: nishiy
+  Date: 13.11.2019
+  Time: 22:10
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <style type="text/css">
+        .head{
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 80px;
+            background: #957454;
+            font-family: cursive;
+            color: black;
+        }
+        #header-title{
+            float: left;
+            font-size: 24px;
+            margin-left: 10px;
+        }
+        #header-author{
+            float: right;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        #main {margin-top: 80px;}
+        .ui-analog-clock{width: 200px}
+        body {background: url("resources/images/background.jpg")}
+    </style>
+    <title>Стартовая страница</title>
+</h:head>
+
+<h:body>
+    <div class="head">
+        <span id="header-title">
+            Лабораторная №3<br/>
+            Вариант 35478
+        </span>
+        <span id="header-author">
+            Астраханцев В.И.<br/>
+            Группа P3214
+        </span>
+    </div>
+    <div id="main">
+        <h2>Время</h2>
+        <p:clock displayMode="analog" syncInterval="70000" autoSync="true"/>
+        <div id="clock"></div>
+    </div>
+    <p:linkButton outcome="toMainPage" value="На главную"/>
+    <h:outputScript library="scripts" name="startPageScript.js" />
+</h:body>
+
+</html>

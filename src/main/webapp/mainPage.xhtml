@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+<h:head>
+    <link rel="stylesheet" href="resources/css/style.css"/>
+    <h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+</h:head>
+<h:body>
+
+        <h:form id="form">
+            <div>
+
+               <h:outputLabel styleClass="coordLabel" value="Выберите X"/>
+                <p:selectOneMenu id="selectMenuX" value="#{checkNHistory.x}"
+                                 style="width: 237px; text-align: right" required="true"
+                                 requiredMessage="X не выбран" dir="rtl">
+                    <f:selectItem itemLabel="Выбрать" noSelectionOption="true"/>
+                    <f:selectItem itemLabel="-2" itemValue="-2"/>
+                    <f:selectItem itemLabel="-1.5" itemValue="-1.5"/>
+                    <f:selectItem itemLabel="-1" itemValue="-1"/>
+                    <f:selectItem itemLabel="-0.5" itemValue="-0.5"/>
+                    <f:selectItem itemLabel="0" itemValue="0"/>
+                    <f:selectItem itemLabel="0.5" itemValue="0.5"/>
+                    <f:selectItem itemLabel="1" itemValue="1"/>
+                    <f:selectItem itemLabel="1.5" itemValue="1.5"/>
+                    <f:selectItem itemLabel="2" itemValue="2"/>
+                    <f:selectItem itemLabel="2.5" itemValue="2.5"/>
+                    <f:selectItem itemLabel="3" itemValue="3"/>
+                </p:selectOneMenu>
+                <h:message for="selectMenuX" style="color: red"/>
+            </div>
+            <div>
+                <h:outputLabel styleClass="coordLabel" value="Выберите Y"/>
+                <p:inputText id="inputTextY" label="X" value="#{checkNHistory.y}" style="text-align: right"
+                             required="true"
+                             requiredMessage="Y не выбран"
+                             validatorMessage="Число выходит за допустимый диапазон(от -3 до 5)"
+                             converterMessage="Введено не число">
+                    <f:validateDoubleRange minimum="-3" maximum="5" for="inputTextY"/>
+                </p:inputText>
+                <h:message for="inputTextY" style="color: red"/>
+            </div>
+            <div>
+                <h:outputLabel  styleClass="coordLabel" value="Выберите R"/>
+                <table id="tableR" cellpadding="10">
+                    <tr>
+                        <td>
+                            <p:commandLink value="1" action="#{checkNHistory.setR(1)}" immediate="true">
+                                <f:ajax render="imageMap"/>
+                            </p:commandLink>
+                        </td>
+                        <td>
+                            <p:commandLink value="1.5" action="#{checkNHistory.setR(1.5)}" immediate="true">
+                                <f:ajax render="imageMap"/>
+                            </p:commandLink>
+                        </td>
+                        <td>
+                            <p:commandLink value="2" action="#{checkNHistory.setR(2)}" immediate="true">
+                                <f:ajax render="imageMap"/>
+                            </p:commandLink>
+                        </td>
+                        <td>
+                            <p:commandLink value="2.5" action="#{checkNHistory.setR(2.5)}" immediate="true">
+                                <f:ajax render="imageMap"/>
+                            </p:commandLink>
+                        </td>
+                        <td>
+                            <p:commandLink value="3" action="#{checkNHistory.setR(3)}" immediate="true">
+                                <f:ajax render="imageMap"/>
+                            </p:commandLink>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div><p:outputLabel style="color: red" value="R не выбран" id="errorR"/></div>
+            <div>
+                <p:commandButton id="cmdButton" action="#{checkNHistory.submitPoint}" value="Проверить">
+                    <f:ajax execute="@form" render="@form historyTable imageMap"/>
+                </p:commandButton>
+            </div>
+        </h:form>
+    <div id="divWithImageMap">
+    <p:graphicImage id="imageMap" width="400" height="400"
+                    value="#{checkNHistory.image}" title="Picture" cache="false"/>
+    </div>
+        <h:form id="hiddenForm" >
+            <h:inputHidden id="hiddenX" value="#{checkNHistory.hiddenX}"/>
+            <h:inputHidden id="hiddenY" value="#{checkNHistory.hiddenY}"/>
+            <h:commandButton id="hiddenCmdButton" action="#{checkNHistory.submitHiddenPoint}" style="display: none">
+                <f:ajax execute="hiddenForm" render="historyTable imageMap"/>
+            </h:commandButton>
+            <p:remoteCommand name="csClickOnMap" action="#{checkNHistory.submitHiddenPoint}" async="true"
+                             form="@form" process="@form" update="imageMap historyTable"/>
+        </h:form>
+    <div id="divWithLinkToSP">
+        <p:linkButton outcome="toStartPage" value="На стартовую"/>
+    </div>
+        <p:dataTable id="historyTable"
+                    render="#{checkNHistory.history.size > 0}"
+                    value="#{checkNHistory.history}"
+                    var="point">
+            <p:column headerText="X">#{point.x}</p:column>
+            <p:column headerText="Y">#{point.y}</p:column>
+            <p:column headerText="R">#{point.r}</p:column>
+            <p:column headerText="Результат">#{point.result}</p:column>
+        </p:dataTable>
+    <script src="resources/scripts/mainScript.js" type="text/javascript"></script>
+</h:body>
+</f:view>
+</html>
