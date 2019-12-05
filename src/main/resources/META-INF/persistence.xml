@@ -6,8 +6,8 @@
         <class>model.Point</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:orbis"/>
-            <property name="hibernate.connection.username" value="s265098"/>
-            <property name="hibernate.connection.password" value="tpb877"/>
+            <property name="hibernate.connection.username" value="1XBET"/>
+            <property name="hibernate.connection.password" value="1XBET"/>
             <property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver"/>
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value = "true"/>
