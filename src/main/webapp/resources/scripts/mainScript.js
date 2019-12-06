@@ -10,7 +10,7 @@ $ = jQuery;
     });
 
     $("#tableR commandLink").on('click', function (e) {
-       $("#form\\:errorR").hide();
+       document.getElementById("form:errorR").style.display = "none";
     });
 
 
