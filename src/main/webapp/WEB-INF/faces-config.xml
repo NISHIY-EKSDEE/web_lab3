@@ -6,8 +6,30 @@
 
     <managed-bean>
         <managed-bean-name>checkNHistory</managed-bean-name>
-        <managed-bean-class>model.CheckAndHistoryBean</managed-bean-class>
+        <managed-bean-class>beans.CheckAndHistoryBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>loginBean</property-name>
+            <property-class>beans.LoginBean</property-class>
+            <value>#{loginBean}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>dbManager</property-name>
+            <property-class>classes.DatabaseManagerBean</property-class>
+            <value>#{databaseManagerBean}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>loginBean</managed-bean-name>
+        <managed-bean-class>beans.LoginBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>databaseManagerBean</managed-bean-name>
+        <managed-bean-class>classes.DatabaseManagerBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
     </managed-bean>
 
     <navigation-rule>

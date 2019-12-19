@@ -1,8 +1,10 @@
 body	{background: url("background.jpg")}
+.inline-block {display: inline-block}
 .coordLabel {font-size: 20px}
-#divWithImageMap  {width: 400px; height: 400px}
+#divWithImageMap  {position: absolute; right: 10px; top: 10px; width: 400px; height: 400px}
 #divWithImageMap img{  transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -webkit-transition: all 0.5s ease;
   -o-transition: all 0.5s ease}
 #tableR td{border: 1px solid black}
+#historyTable {position: absolute; top: 420px}

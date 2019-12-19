@@ -1,18 +1,17 @@
 package model;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name="LAB3_POINTS")
+@Table(name="points")
+@SequenceGenerator(name="seq", initialValue=1, allocationSize=1)
 public class Point {
     @Id
-    @Column(name="ID", nullable = false)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
+    @Column(name="ID", updatable = false, nullable = false)
+    private Long id;
     @Column(name="X", nullable = false)
     private Double x;
     @Column(name="Y", nullable = false)
@@ -21,16 +20,21 @@ public class Point {
     private Double r;
     @Column(name="RESULT", nullable = false)
     private Boolean result;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "owner_id")
+    private User owner;
 
-    public Point(){
-        id = UUID.randomUUID().toString();
-    }
+    public Point(){}
 
-    public Point(Double x, Double y, Double r, Boolean result) {
+    public Point(Double x, Double y, Double r) {
         this();
         this.x = x;
         this.y = y;
         this.r = r;
+    }
+
+    public Point(Double x, Double y, Double r, Boolean result) {
+        this(x, y, r);
         this.result = result;
     }
 
@@ -77,11 +81,19 @@ public class Point {
         this.result = result;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

@@ -9,9 +9,6 @@ $ = jQuery;
         csClickOnMap();
     });
 
-    $("#tableR commandLink").on('click', function (e) {
-       document.getElementById("form:errorR").style.display = "none";
-    });
 
 
 

@@ -1,4 +1,6 @@
-package model;
+package classes;
+
+import model.Point;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,10 +11,12 @@ public class DrawingMap {
     private static final Color FALSE_COLOR = Color.red;
     private static final Color TRUE_COLOR = Color.green;
     private static final Color AREA_COLOR = new Color(0x0066ff);
+    private final AreaChecker areaChecker;
     private BufferedImage image;
     private Graphics2D g2d;
 
     public DrawingMap(){
+        areaChecker = new AreaChecker();
         image = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
         g2d = image.createGraphics();
         drawBackground();
@@ -77,7 +81,7 @@ public class DrawingMap {
         g2d.fillPolygon(triangle);
     }
 
-    public void drawNewPoint(Point p){
+    public void drawNewPoint(model.Point p){
         int x = 200 + (int)Math.round(p.getX()*35);
         int y = 200 - (int)Math.round(p.getY()*35);
         if(p.getResult()){
@@ -93,7 +97,7 @@ public class DrawingMap {
         //POINTS
         int pixX;
         int pixY;
-        for(Point p : points){
+        for(model.Point p : points){
             pixX = 200 + (int)Math.round(p.getX()*35);
             pixY = 200 - (int)Math.round(p.getY()*35);
             g2d.setColor(FALSE_COLOR);
@@ -112,9 +116,7 @@ public class DrawingMap {
             y = p.getY();
             pixX = 200 + (int)Math.round(p.getX()*35);
             pixY = 200 - (int)Math.round(p.getY()*35);
-            boolean result = (x >= 0 && x <= r/2 && y <= 0 && y >= -r)
-                    ||(x <= 0 && y <= 0 && y >= -x - r/2)
-                    ||(x >= 0 && y >= 0 && Math.pow(x, 2) + Math.pow(y, 2) <= Math.pow(r/2, 2) );
+            boolean result = areaChecker.check(x, y, r);
             if(result){
                 g2d.setColor(TRUE_COLOR);
             }

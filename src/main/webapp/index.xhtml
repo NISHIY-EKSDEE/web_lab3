@@ -11,7 +11,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
     <style type="text/css">
@@ -58,7 +58,14 @@
         <p:clock displayMode="analog" syncInterval="70000" autoSync="true"/>
         <div id="clock"></div>
     </div>
-    <p:linkButton outcome="toMainPage" value="На главную"/>
+    <h:form>
+        <p:inputText value="#{loginBean.login}" required="true"
+                     requiredMessage="Введите логин"/>
+        <p:commandButton action="toMainPage" value="На главную">
+            <f:actionListener binding="#{checkNHistory.checkLogin()}"/>
+        </p:commandButton>
+    </h:form>
+
     <h:outputScript library="scripts" name="startPageScript.js" />
 </h:body>
 
